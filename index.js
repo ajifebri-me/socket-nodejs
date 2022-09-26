@@ -10,3 +10,11 @@ io.on("connection", socket => {
         io.emit("message", param)
     })
 })
+
+app.get("/", function(request, response){
+    response.send("ok")
+})
+
+server.listen(3000, function(){
+    console.log("server running on port 3000")
+})
