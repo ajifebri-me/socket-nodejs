@@ -8,5 +8,19 @@
 </head>
 <body>
     <h1>Home</h1>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io()
+    socket.on("connection", function(message){
+        alert(message)
+    })
+
+    socket.emit("join")
+    socket.emit("message", {nama: "jono", type: "pengurangan", amount: 50})
+
+    socket.on("message", function(messsage){
+        console.log(message)
+    })
+</script>
 </body>
 </html>
