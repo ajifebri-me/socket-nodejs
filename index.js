@@ -17,4 +17,4 @@ io.on("connection",socket => {
     })
 })
 
-io.listen(80)
+io.listen(3000)
