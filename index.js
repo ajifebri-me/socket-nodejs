@@ -10,9 +10,7 @@ const io = require("socket.io")(http,{
 /**
  * Create Connection Socket Server
  */
-let connectedSocket;
 io.on("connection",socket => {
-    connectedSocket = socket
     socket.on("message", param => {
         io.emit("message", param)
     })
@@ -35,7 +33,7 @@ app.use(express.urlencoded({extended: false}))
 //public channel
 app.post("/emit", function(request, response){
     try {
-        connectedSocket.emit("message", request.body)
+        io.emit("message", request.body)
     
         response.status(200).json({
             status: true,
@@ -52,7 +50,8 @@ app.post("/emit", function(request, response){
 //private channel
 app.post("/emit/privat-channel", function(request, response){
     try {
-        connectedSocket.emit("private message", 2, "response 1")
+        let requestBody = request.body
+        io.emit("private message", requestBody.id, requestBody)
 
         response.status(200).json({
             status: true,
